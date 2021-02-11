@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesWebExerciseMvc.Models;
+using SalesWebExerciseMvc.Models.Enums;
 
 namespace SalesWebExerciseMvc.Data
 {
@@ -14,6 +15,8 @@ namespace SalesWebExerciseMvc.Data
         {
         }
 
-        public DbSet<SalesWebExerciseMvc.Models.Department> Department { get; set; }
+        public DbSet<Department> Department { get; set; }
+        public DbSet<Seller> Seller { get; set; }
+        public DbSet<SalesRecord> salesRecords { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWebExerciseMvc.Data;
 using SalesWebExerciseMvc.Models;
+using SalesWebExerciseMvc.Models.ViewModels;
 
 namespace SalesWebExerciseMvc.Controllers
 {
