@@ -29,7 +29,7 @@ namespace SalesWebExerciseMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Department");
+                    b.ToTable("department");
                 });
 
             modelBuilder.Entity("SalesWebExerciseMvc.Models.Enums.SalesRecord", b =>
@@ -50,7 +50,7 @@ namespace SalesWebExerciseMvc.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("salesRecords");
+                    b.ToTable("salesRecord");
                 });
 
             modelBuilder.Entity("SalesWebExerciseMvc.Models.Seller", b =>
@@ -73,7 +73,7 @@ namespace SalesWebExerciseMvc.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Seller");
+                    b.ToTable("seller");
                 });
 
             modelBuilder.Entity("SalesWebExerciseMvc.Models.Enums.SalesRecord", b =>

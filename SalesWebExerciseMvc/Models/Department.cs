@@ -16,9 +16,9 @@ namespace SalesWebExerciseMvc.Models
         {
         }
 
-        public Department(int id, string name)
+        public Department(string name)
         {
-            Id = id;
+            
             Name = name ?? throw new ArgumentNullException(nameof(name));
         }
         public void AddSeller(Seller seller)

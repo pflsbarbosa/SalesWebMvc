@@ -9,7 +9,20 @@ namespace SalesWebExerciseMvc.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Seller",
+                name: "department",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_department", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "seller",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -22,17 +35,17 @@ namespace SalesWebExerciseMvc.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Seller", x => x.Id);
+                    table.PrimaryKey("PK_seller", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Seller_Department_DepartmentId",
+                        name: "FK_seller_department_DepartmentId",
                         column: x => x.DepartmentId,
-                        principalTable: "Department",
+                        principalTable: "department",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "salesRecords",
+                name: "salesRecord",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -44,33 +57,36 @@ namespace SalesWebExerciseMvc.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_salesRecords", x => x.Id);
+                    table.PrimaryKey("PK_salesRecord", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_salesRecords_Seller_SellerId",
+                        name: "FK_salesRecord_seller_SellerId",
                         column: x => x.SellerId,
-                        principalTable: "Seller",
+                        principalTable: "seller",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_salesRecords_SellerId",
-                table: "salesRecords",
+                name: "IX_salesRecord_SellerId",
+                table: "salesRecord",
                 column: "SellerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Seller_DepartmentId",
-                table: "Seller",
+                name: "IX_seller_DepartmentId",
+                table: "seller",
                 column: "DepartmentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "salesRecords");
+                name: "salesRecord");
 
             migrationBuilder.DropTable(
-                name: "Seller");
+                name: "seller");
+
+            migrationBuilder.DropTable(
+                name: "department");
         }
     }
 }

@@ -10,7 +10,7 @@ using SalesWebExerciseMvc.Data;
 namespace SalesWebExerciseMvc.Migrations
 {
     [DbContext(typeof(SalesWebExerciseMvcContext))]
-    [Migration("20210211152439_Initial")]
+    [Migration("20210212115049_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace SalesWebExerciseMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Department");
+                    b.ToTable("department");
                 });
 
             modelBuilder.Entity("SalesWebExerciseMvc.Models.Enums.SalesRecord", b =>
@@ -52,7 +52,7 @@ namespace SalesWebExerciseMvc.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("salesRecords");
+                    b.ToTable("salesRecord");
                 });
 
             modelBuilder.Entity("SalesWebExerciseMvc.Models.Seller", b =>
@@ -75,7 +75,7 @@ namespace SalesWebExerciseMvc.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Seller");
+                    b.ToTable("seller");
                 });
 
             modelBuilder.Entity("SalesWebExerciseMvc.Models.Enums.SalesRecord", b =>
