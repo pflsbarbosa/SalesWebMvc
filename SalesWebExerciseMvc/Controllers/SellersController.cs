@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesWebExerciseMvc.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,18 @@ namespace SalesWebExerciseMvc.Controllers
 {
     public class SellersController : Controller
     {
+        //Declaring seller service dependency
+        private readonly SellerService _sellerService ;
+        // constructor for injection dependency
+        public SellersController(SellerService sellerService)
+        {
+            _sellerService = sellerService;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var list = _sellerService.FindingAll();
+            return View(list);
         }
     }
 }

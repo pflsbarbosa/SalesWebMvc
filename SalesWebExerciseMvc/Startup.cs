@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesWebExerciseMvc.Data;
+using SalesWebExerciseMvc.Services;
 
 namespace SalesWebExerciseMvc
 {
@@ -39,9 +40,9 @@ namespace SalesWebExerciseMvc
             services.AddDbContext<SalesWebExerciseMvcContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SalesWebExerciseMvcContext")));
 
-            //+++register SeedingService for dependency injection system++++
+            //+++registering services for dependency injection system++++
             services.AddScoped<SeedingService>();
-        
+            services.AddScoped<SellerService>();
         
         }
 
