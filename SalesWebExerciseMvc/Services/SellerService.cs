@@ -28,6 +28,15 @@ namespace SalesWebExerciseMvc.Services
                       
         }
 
+        public void Insert(Seller obj)
+        {
+            //insert the obj in the database
+            _context.Add(obj);
+            //Granting or confirming the changes
+            _context.SaveChanges();
+            
+        }
+
 
     }
 }

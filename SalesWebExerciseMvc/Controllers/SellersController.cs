@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesWebExerciseMvc.Models;
 using SalesWebExerciseMvc.Services;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,18 @@ namespace SalesWebExerciseMvc.Controllers
         {
             var list = _sellerService.FindingAll();
             return View(list);
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Seller seller)
+        {
+            _sellerService.Insert(seller);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
