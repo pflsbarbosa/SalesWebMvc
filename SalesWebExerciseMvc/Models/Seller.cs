@@ -15,6 +15,7 @@ namespace SalesWebExerciseMvc.Models
         public DateTime BirthDate { get; set; }
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
+        public int DepartmentId { get; set; } //EF see int as not null field in database
         public ICollection<SalesRecord> Sales { get; set; }
 
         public Seller() { }
