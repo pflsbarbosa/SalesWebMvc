@@ -43,7 +43,7 @@ namespace SalesWebExerciseMvc
             //+++registering services for dependency injection system++++
             services.AddScoped<SeedingService>();
             services.AddScoped<SellerService>();
-        
+            services.AddScoped<DepartmentService>();
         }
 
 

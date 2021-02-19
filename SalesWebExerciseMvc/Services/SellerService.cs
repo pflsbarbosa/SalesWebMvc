@@ -30,7 +30,7 @@ namespace SalesWebExerciseMvc.Services
 
         public void Insert(Seller obj)
         {
-            obj.Department = _context.department.First();
+            
             //insert the obj in the database
             _context.Add(obj);
             //Granting or confirming the changes
