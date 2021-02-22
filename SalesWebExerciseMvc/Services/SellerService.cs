@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SalesWebExerciseMvc.Services.Exceptions;
 
 namespace SalesWebExerciseMvc.Services
 {
@@ -23,25 +24,26 @@ namespace SalesWebExerciseMvc.Services
 
         // implementig find all        
 
-        public List<Seller> FindingAll () {
+        public List<Seller> FindingAll()
+        {
 
             return _context.seller.ToList();//Syncronous function
-                      
+
         }
         public void Insert(Seller obj)
         {
-            
+
             //insert the obj in the database
             _context.Add(obj);
             //Granting or confirming the changes
             _context.SaveChanges();
-            
+
         }
         public Seller FindById(int id)
         {
             //Eager Loaad(load other objects associated with the main object)
             //Insert Include form Microsoft Enitiy Frame Work Core to Make a "Join"
-            return _context.seller.Include(obj =>obj.Department).FirstOrDefault(seller => seller.Id == id);
+            return _context.seller.Include(obj => obj.Department).FirstOrDefault(seller => seller.Id == id);
         }
 
         public void Remove(int id)
@@ -51,7 +53,24 @@ namespace SalesWebExerciseMvc.Services
             _context.SaveChanges();
         }
 
+        public void Update(Seller obj)
+        {
+            if (!_context.seller.Any(s => s.Id == obj.Id))
+            {
+                throw new NotFoundException("Id not found");
+            }
 
+            try //using try to avoid DB concurrency exception
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
+
+        }
 
     }
 }
