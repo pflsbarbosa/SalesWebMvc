@@ -27,7 +27,6 @@ namespace SalesWebExerciseMvc.Services
             return _context.seller.ToList();//Syncronous function
                       
         }
-
         public void Insert(Seller obj)
         {
             
@@ -37,6 +36,18 @@ namespace SalesWebExerciseMvc.Services
             _context.SaveChanges();
             
         }
+        public Seller FindById(int id)
+        {
+            return _context.seller.FirstOrDefault(seller => seller.Id == id);
+        }
+
+        public void Remove(int id)
+        {
+            var sellerToDelete = _context.seller.Find(id);
+            _context.seller.Remove(sellerToDelete);
+            _context.SaveChanges();
+        }
+
 
 
     }
