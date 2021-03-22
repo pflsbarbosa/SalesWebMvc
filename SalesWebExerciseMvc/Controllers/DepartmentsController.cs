@@ -13,8 +13,9 @@ namespace SalesWebExerciseMvc.Controllers
 {
     public class DepartmentsController : Controller
     {
+        //Declaring services dependency
         private readonly SalesWebExerciseMvcContext _context;
-
+        // constructor for injection dependency
         public DepartmentsController(SalesWebExerciseMvcContext context)
         {
             _context = context;
