@@ -41,6 +41,14 @@ namespace SalesWebExerciseMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Seller seller)
         {
+            //To avoid wrong validation data when JavaScript is not enabled in the user's browser
+            if (!ModelState.IsValid)//if not valid return the same view with the object
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -110,6 +118,14 @@ namespace SalesWebExerciseMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int? id, Seller seller)
         {
+            //To avoid wrong validation data when JavaScript is not enabled in the user's browser
+            if (!ModelState.IsValid)//if not valid return the same view with the object
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+
             if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
