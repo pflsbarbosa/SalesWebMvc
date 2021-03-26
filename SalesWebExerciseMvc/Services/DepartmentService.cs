@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWebExerciseMvc.Services
 {
@@ -20,9 +21,10 @@ namespace SalesWebExerciseMvc.Services
         //--- End of Dependency injection ---
 
         //implementing methods
-        public List<Department> FindAll()
+        public async Task<List<Department>> FindAllAsync()
         {
-            return _context.department.OrderBy(x => x.Name).ToList();
+            // "wait" is for the compiler to be informed that this is an asynchronous operation.
+            return await _context.department.OrderBy(x => x.Name).ToListAsync();
         }
 
 
