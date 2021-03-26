@@ -46,9 +46,17 @@ namespace SalesWebExerciseMvc.Services
 
         public async Task RemoveAsync(int id)
         {
-            var sellerToDelete = await _context.seller.FindAsync(id);
-            _context.seller.Remove(sellerToDelete);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var sellerToDelete = await _context.seller.FindAsync(id);
+                _context.seller.Remove(sellerToDelete);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
+            }
         }
 
         public async Task UpdateAsync(Seller obj)
@@ -63,8 +71,8 @@ namespace SalesWebExerciseMvc.Services
 
             try //using try to avoid DB concurrency exception
             {
-               _context.Update(obj);
-               await _context.SaveChangesAsync();
+                _context.Update(obj);
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e)
             {
