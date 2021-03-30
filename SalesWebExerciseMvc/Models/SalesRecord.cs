@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SalesWebExerciseMvc.Models;
+using SalesWebExerciseMvc.Models.Enums;
 
-namespace SalesWebExerciseMvc.Models.Enums
+namespace SalesWebExerciseMvc.Models
 {
     public class SalesRecord
     {

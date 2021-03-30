@@ -26,7 +26,7 @@ namespace SalesWebExerciseMvc.Services
 
         public async Task<List<Seller>> FindingAllAsync()
         {
-            return await _context.seller.ToListAsync();//Syncronous function
+            return await _context.seller.ToListAsync();//Asyncronous function
         }
         public async Task InsertAsync(Seller obj)
         {
