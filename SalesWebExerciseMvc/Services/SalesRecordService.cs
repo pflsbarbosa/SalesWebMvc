@@ -20,11 +20,9 @@ namespace SalesWebExerciseMvc.Services
         }
         //--- End of Dependency injection ---
 
-        public async Task<List<SalesRecord>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
+       public async Task<List<SalesRecord>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
         {
-            // return await _context.salesRecord.Where(dt => (dt.Date >= min.Value)&&((dt.Date < max.Value))).ToListAsync();
-            var result = from obj in _context.salesRecord select obj;
-
+            var result = from obj in _context.salesRecord  select obj;
             if (minDate.HasValue)
             {
                 result = result.Where(x => x.Date >= minDate.Value);
@@ -33,16 +31,31 @@ namespace SalesWebExerciseMvc.Services
             {
                 result = result.Where(x => x.Date <= maxDate.Value);
             }
-
             return await result
-                .Include(x => x.Seller) // join table Seller
-                .Include(x => x.Seller.Department)// join table Departments
+                .Include(x => x.Seller)
+                .Include(x => x.Seller.Department)
                 .OrderByDescending(x => x.Date)
                 .ToListAsync();
         }
 
-       
-
+        public async Task<List<IGrouping<Department,SalesRecord>>> FindByDateGroupingAsync(DateTime? minDate, DateTime? maxDate)
+        {
+            var result = from obj in _context.salesRecord select obj;
+            if (minDate.HasValue)
+            {
+                result = result.Where(x => x.Date >= minDate.Value);
+            }
+            if (maxDate.HasValue)
+            {
+                result = result.Where(x => x.Date <= maxDate.Value);
+            }
+            return await result
+                .Include(x => x.Seller)
+                .Include(x => x.Seller.Department)
+                .OrderByDescending(x => x.Date)
+                .GroupBy(x => x.Seller.Department)
+                .ToListAsync();
+        }
       
     }
 }

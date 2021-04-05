@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<SalesWebExerciseMvc.Models.SalesRecord>
-
 @{
     ViewData["Title"] = "Simple Search";
 }
@@ -20,7 +19,7 @@
                     <input type="date" class="form-control" name="maxDate" value=@ViewData["maxDate"] />
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
+            <a class="btn btn-primary" asp-action="SimpleSearch">Filter</a>
         </form>
     </div>
 </nav>
@@ -80,3 +79,4 @@
         </table>
     </div>
 </div>
+
